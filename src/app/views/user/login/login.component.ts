@@ -34,13 +34,6 @@ export class LoginComponent implements OnInit {
               throw new Error(data.message ? data.message : 'Error with data on login');
             }
 
-            this.authService.setUserInfo({
-              fullName: data.fullName,
-              userId: data.userId,
-              // email: result.email
-            })
-            this.authService.setTokens(data.accessToken, data.refreshToken);
-
             this.router.navigate(['/choice']);
           },
           error: (error: HttpErrorResponse) => {
