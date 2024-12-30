@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
               // email: result.email
             })
             this.authService.setTokens(data.accessToken, data.refreshToken);
-            
+
             this.router.navigate(['/choice']);
           },
           error: (error: HttpErrorResponse) => {
