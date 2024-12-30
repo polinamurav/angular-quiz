@@ -1,0 +1,126 @@
+body {
+  margin: 0;
+  font-family: "Museo Sans Cyrl", sans-serif;
+  color: #333;
+}
+
+a {
+  color: #6933dc;
+}
+
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.button {
+  border-radius: 6px;
+  padding: 14px 35px;
+  background: #6933dc;
+  font-size: 17px;
+  line-height: 20px;
+  color: #fff;
+  border: 0;
+  transition: .4s;
+  cursor: pointer;
+  text-decoration: none;
+  &a {
+    display: inline-block;
+  }
+  &:hover {
+    background: #390d93;
+  }
+  &:disabled {
+    background-color: #e2dfe7;
+    cursor: not-allowed;
+  }
+
+  &.button-transparent {
+    background: transparent;
+    color: #6933dc;
+    border: 1px solid #6933dc;
+    &:hover {
+      background: #6933dc;
+      color: white;
+    }
+    &:disabled {
+      background: transparent;
+      color: #e2dfe7;
+      border: 1px solid #e2dfe7;
+    }
+  }
+}
+
+.common-title {
+  font-family: "Museo Sans Cyrl Bold", sans-serif;
+  font-size: 48px;
+  line-height: 58px;
+  color: #333;
+  span {
+    color: #6933dc;
+  }
+}
+
+input[type="radio"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 3px solid #6933dc;
+  border-radius: 50%;
+  margin: 0 13px 0 0;
+  transform: translateY(2px);
+  display: grid;
+  place-content: center;
+}
+
+input[type="radio"]::before {
+  content: "";
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  box-shadow: inset 10px 10px #6933dc;
+  transition: .2s ease transform;
+  transform: scale(0);
+}
+
+input[type="radio"]:checked::before {
+  transform: scale(1);
+}
+
+.big-title {
+  font-family: "Museo Sans Cyrl Bold", sans-serif;
+  font-size: 54px;
+  line-height: 65px;
+  span {
+    color: #6933dc;
+  }
+}
+
+.link-result {
+  display: flex;
+  justify-content: end;
+  a {
+    font-size: 17px;
+    color: #6933dc;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+  img {
+    margin-left: 13px;
+  }
+}
+
+.common-question-title {
+  font-family: "Museo Sans Cyrl Bold", sans-serif;
+  font-size: 36px;
+  line-height: 43px;
+  span {
+    color: #6933dc;
+  }
+}
