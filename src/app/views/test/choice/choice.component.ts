@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {TestService} from "../../../shared/services/test.service";
+import {QuizListType} from "../../../../types/quiz-list.type";
 
 @Component({
   selector: 'app-choice',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ChoiceComponent implements OnInit {
 
-  constructor() { }
+  quizzes: QuizListType[] = [];
+
+  constructor(private testService: TestService) { }
 
   ngOnInit(): void {
+    this.testService.getTests()
+      .subscribe((result: QuizListType[]) => {
+        this.quizzes = result;
+      })
   }
 
 }
