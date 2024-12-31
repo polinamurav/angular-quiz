@@ -73,20 +73,18 @@ input[type="radio"] {
   transform: translateY(2px);
   display: grid;
   place-content: center;
-}
-
-input[type="radio"]::before {
-  content: "";
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  box-shadow: inset 10px 10px #6933dc;
-  transition: .2s ease transform;
-  transform: scale(0);
-}
-
-input[type="radio"]:checked::before {
-  transform: scale(1);
+  &::before {
+    content: "";
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    box-shadow: inset 10px 10px #6933dc;
+    transition: .2s ease transform;
+    transform: scale(0);
+  }
+  &:checked::before {
+    transform: scale(1);
+  }
 }
 
 .big-title {
