@@ -7,6 +7,9 @@ import {UserInfoType} from "../../../types/user-info.type";
 import {LogoutResponseType} from "../../../types/logout-response.type";
 import {SignupResponseType} from "../../../types/signup-response.type";
 import {RefreshResponseType} from "../../../types/refresh-response.type";
+import {UserResultType} from "../../../types/user-result.type";
+import {PassTestResponseType} from "../../../types/pass-test-response.type";
+import {DefaultResponseType} from "../../../types/default-response.type";
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +18,9 @@ export class AuthService {
   public accessTokenKey: string = 'accessToken';
   private refreshTokenKey: string = 'refreshToken';
   private userInfoKey: string = 'userInfo';
+  private userAnswersKey: string = 'userAnswers';
+  private scoreKey: string = 'score';
+  private totalKey: string = 'total';
 
   public isLogged$: Subject<boolean> = new Subject<boolean>();
   private isLogged: boolean = false;
@@ -81,6 +87,15 @@ export class AuthService {
 
   public setUserInfo(info: UserInfoType): void {
     localStorage.setItem(this.userInfoKey, JSON.stringify(info));
+  }
+
+  public setUserAnswer(userResult: UserResultType[]): void {
+    localStorage.setItem(this.userAnswersKey, JSON.stringify(userResult));
+  }
+
+  public setResults(result: DefaultResponseType | PassTestResponseType): void {
+    localStorage.setItem(this.scoreKey, String((result as PassTestResponseType).score));
+    localStorage.setItem(this.totalKey, String((result as PassTestResponseType).total));
   }
 
   public removeUserInfo(): void {
