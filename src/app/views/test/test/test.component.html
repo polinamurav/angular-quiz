@@ -10,25 +10,27 @@
       </div>
       <div class="test-question-options" id="options">
         <div class="test-question-option" *ngFor="let answer of activeQuestion.answers">
-          <input class="option-answer" id="answer-{{answer.id}}" type="radio" name="answer" value="{{answer.id}}">
+          <input class="option-answer" id="answer-{{answer.id}}" [(ngModel)]="chosenAnswerId" type="radio" name="answer" [value]="answer.id">
           <label for="answer-{{answer.id}}">{{ answer.answer }}</label>
         </div>
       </div>
     </div>
     <div class="test-actions">
       <div class="test-previous-action">
-        <button class="button button-transparent" disabled id="prev">Назад</button>
+        <button class="button button-transparent" id="prev" [disabled]="currentQuestionIndex === 1" (click)="move(actionTestType.prev)">Назад</button>
       </div>
       <div class="test-time">
         <div class="test-time-text">Осталось времени:</div>
         <div class="test-time-clock" id="timer">{{ timerSeconds }}</div>
       </div>
       <div class="test-next-action">
-        <button class="button button-transparent" disabled id="next">Дальше</button>
+        <button class="button button-transparent" id="next" [disabled]="!chosenAnswerId" (click)="move(actionTestType.next)">
+          {{ currentQuestionIndex === quiz.questions.length ? 'Завершить' : 'Дальше' }}
+        </button>
       </div>
     </div>
     <div class="pass-question">
-      <a href="javascript:void(0)" class="pass-question-a" id="pass">Пропустить вопрос <img
+      <a href="javascript:void(0)" class="pass-question-a" id="pass" (click)="move(actionTestType.pass)">Пропустить вопрос <img
         src="assets/images/small-arrow.png" alt="Стрелка"></a>
     </div>
   </div>

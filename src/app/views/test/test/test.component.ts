@@ -3,6 +3,8 @@ import {ActivatedRoute} from "@angular/router";
 import {TestService} from "../../../shared/services/test.service";
 import {DefaultResponseType} from "../../../../types/default-response.type";
 import {QuizType} from "../../../../types/quiz.type";
+import {UserResultType} from "../../../../types/user-result.type";
+import {ActionTestType} from "../../../../types/action-test.type";
 
 @Component({
   selector: 'app-test',
@@ -15,6 +17,9 @@ export class TestComponent implements OnInit {
   timerSeconds: number = 59;
   private interval: number = 0;
   currentQuestionIndex: number = 1;
+  chosenAnswerId: number | null = null;
+  readonly userResult: UserResultType[] = [];
+  actionTestType = ActionTestType;
 
   constructor(private activatedRoute: ActivatedRoute, private testService: TestService) { }
 
@@ -39,13 +44,13 @@ export class TestComponent implements OnInit {
 
     //show question
 
-    this.interval = window.setInterval(() => {
-      this.timerSeconds--;
-      if (this.timerSeconds === 0) {
-        clearInterval(this.interval);
-        this.complete();
-      }
-    }, 1000);
+    // this.interval = window.setInterval(() => {
+    //   this.timerSeconds--;
+    //   if (this.timerSeconds === 0) {
+    //     clearInterval(this.interval);
+    //     this.complete();
+    //   }
+    // }, 1000);
   }
 
   get activeQuestion() {
@@ -54,6 +59,58 @@ export class TestComponent implements OnInit {
 
   complete(): void {
 
+  }
+
+  move(action: ActionTestType): void {
+    const existingResult: UserResultType | undefined = this.userResult.find(item => {
+      return item.questionId === this.activeQuestion.id;
+    });
+
+    if (this.chosenAnswerId) {
+      if (existingResult) {
+        existingResult.chosenAnswerId = this.chosenAnswerId;
+      } else {
+        this.userResult.push({
+          questionId: this.activeQuestion.id,
+          chosenAnswerId: this.chosenAnswerId
+        });
+      }
+    }
+
+    if (action === ActionTestType.next || action === ActionTestType.pass) {
+      this.currentQuestionIndex++;
+    } else {
+      this.currentQuestionIndex--;
+    }
+
+    const currentResult: UserResultType | undefined = this.userResult.find(item => {
+      return item.questionId === this.activeQuestion.id;
+    })
+    if (currentResult) {
+      this.chosenAnswerId = currentResult.chosenAnswerId;
+    } else {
+      this.chosenAnswerId = null;
+    }
+
+    if (this.currentQuestionIndex > this.quiz.questions.length) {
+      clearInterval(this.interval);
+      this.complete();
+      return;
+    }
+
+    // if (this.progressBarElement) {
+    //   Array.from(this.progressBarElement.children).forEach((item: Element, index: number) => {
+    //     const currentItemIndex: number = index + 1;
+    //     item.classList.remove('complete');
+    //     item.classList.remove('active');
+    //
+    //     if (currentItemIndex === this.currentQuestionIndex) {
+    //       item.classList.add('active');
+    //     } else if (currentItemIndex < this.currentQuestionIndex) {
+    //       item.classList.add('complete');
+    //     }
+    //   })
+    // }
   }
 
 }
