@@ -93,6 +93,10 @@ export class AuthService {
     localStorage.setItem(this.userAnswersKey, JSON.stringify(userResult));
   }
 
+  public getUserAnswer() {
+    return localStorage.getItem(this.userAnswersKey);
+  }
+
   public setResults(result: DefaultResponseType | PassTestResponseType): void {
     localStorage.setItem(this.scoreKey, String((result as PassTestResponseType).score));
     localStorage.setItem(this.totalKey, String((result as PassTestResponseType).total));

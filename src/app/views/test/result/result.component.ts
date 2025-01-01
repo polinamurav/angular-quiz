@@ -38,4 +38,12 @@ export class ResultComponent implements OnInit {
       })
     }
   }
+
+  seeResult(): void {
+    this.activatedRoute.queryParams.subscribe(params => {
+      if (params['id']) {
+        this.router.navigate(['/answers'], {queryParams: {id: params['id']}});
+      }
+    });
+  }
 }

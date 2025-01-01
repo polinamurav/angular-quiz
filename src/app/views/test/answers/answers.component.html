@@ -1,0 +1,26 @@
+<section class="answers" *ngIf="quiz">
+  <div class="container">
+    <div class="answers-pre-title">Результат прохождения теста
+      <img src="assets/images/transparent-arrow.png" alt="Стрелка">
+      <span id="answer-pre-title">{{quiz.name}}</span>
+    </div>
+    <div class="answers-title common-title"><span>Правильные ответы</span> к тесту</div>
+    <div class="answers-title-name">Тест выполнил <span id="answers-title-name">{{userInfo?.fullName}}</span></div>
+    <div class="answers-questions" id="options">
+      <div class="answers-question" *ngFor="let quiz of quiz.questions; let i = index">
+        <div class="answers-question-title common-question-title">
+          <span>Вопрос {{i + 1}}:</span> {{ quiz.question }}
+        </div>
+        <div class="answers-question-options">
+          <div class="answers-question-option" *ngFor="let answer of quiz.answers" [class.correct]="answer.correct === true" [class.incorrect]="answer.correct === false">
+            <input type="radio" [class.correct]="answer.correct === true" [class.incorrect]="answer.correct === false" id="answer-{{answer.id}}" name="answer" disabled>
+            <label for="answer-{{answer.id}}">{{ answer.answer }}</label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="my-result link-result">
+      <a href="javascript:void(0)" id="my-result" (click)="backToResult()">Обратно к моему результату теста <img src="assets/images/arrow-second.png" alt="Стрелка"></a>
+    </div>
+  </div>
+</section>
