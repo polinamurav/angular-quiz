@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
 import {Observable} from "rxjs";
-import {LoginResponseType} from "../../../types/login-response.type";
-import {SignupResponseType} from "../../../types/signup-response.type";
 import {environment} from "../../../environments/environment";
 import {HttpClient} from "@angular/common/http";
 import {QuizListType} from "../../../types/quiz-list.type";
@@ -35,5 +33,9 @@ export class TestService {
       userId: userId,
       results: userResult
     });
+  }
+
+  getResult(id: number | string, userId: string | number): Observable<DefaultResponseType | PassTestResponseType> {
+    return this.http.get<DefaultResponseType | PassTestResponseType>(environment.apiHost + 'tests/' + id + '/result?userId=' + userId);
   }
 }

@@ -8,6 +8,7 @@ const routes: Routes = [
   {path: 'choice', component: ChoiceComponent},
   {path: 'test/:id', component: TestComponent},
   {path: 'result', component: ResultComponent},
+  {path: 'answers', component: ResultComponent},
 ];
 
 @NgModule({
