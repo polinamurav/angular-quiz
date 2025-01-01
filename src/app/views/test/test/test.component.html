@@ -6,10 +6,13 @@
     </div>
     <div class="test-question">
       <div class="test-question-title common-question-title" id="title">
-        <span>Вопрос 2:</span> Тут должен быть текст вопроса?
+        <span>Вопрос {{ currentQuestionIndex }}:</span> {{ activeQuestion.question }}
       </div>
       <div class="test-question-options" id="options">
-
+        <div class="test-question-option" *ngFor="let answer of activeQuestion.answers">
+          <input class="option-answer" id="answer-{{answer.id}}" type="radio" name="answer" value="{{answer.id}}">
+          <label for="answer-{{answer.id}}">{{ answer.answer }}</label>
+        </div>
       </div>
     </div>
     <div class="test-actions">

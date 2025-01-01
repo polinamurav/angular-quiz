@@ -14,6 +14,7 @@ export class TestComponent implements OnInit {
   quiz!: QuizType;
   timerSeconds: number = 59;
   private interval: number = 0;
+  currentQuestionIndex: number = 1;
 
   constructor(private activatedRoute: ActivatedRoute, private testService: TestService) { }
 
@@ -45,6 +46,10 @@ export class TestComponent implements OnInit {
         this.complete();
       }
     }, 1000);
+  }
+
+  get activeQuestion() {
+    return this.quiz.questions[this.currentQuestionIndex - 1]
   }
 
   complete(): void {
