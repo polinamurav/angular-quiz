@@ -40,17 +40,13 @@ export class TestComponent implements OnInit {
   }
 
   startQuiz(): void {
-    //progress bar
-
-    //show question
-
-    // this.interval = window.setInterval(() => {
-    //   this.timerSeconds--;
-    //   if (this.timerSeconds === 0) {
-    //     clearInterval(this.interval);
-    //     this.complete();
-    //   }
-    // }, 1000);
+    this.interval = window.setInterval(() => {
+      this.timerSeconds--;
+      if (this.timerSeconds === 0) {
+        clearInterval(this.interval);
+        this.complete();
+      }
+    }, 1000);
   }
 
   get activeQuestion() {
@@ -97,20 +93,6 @@ export class TestComponent implements OnInit {
       this.complete();
       return;
     }
-
-    // if (this.progressBarElement) {
-    //   Array.from(this.progressBarElement.children).forEach((item: Element, index: number) => {
-    //     const currentItemIndex: number = index + 1;
-    //     item.classList.remove('complete');
-    //     item.classList.remove('active');
-    //
-    //     if (currentItemIndex === this.currentQuestionIndex) {
-    //       item.classList.add('active');
-    //     } else if (currentItemIndex < this.currentQuestionIndex) {
-    //       item.classList.add('complete');
-    //     }
-    //   })
-    // }
   }
 
 }
